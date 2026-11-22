@@ -71,17 +71,19 @@
         </div>
 
         <div>
-          <label for="email">Your email (optional)</label>
-          <input id="email" type="email" autocomplete="email" placeholder="you@example.com">
-          <div class="hint">Adds a confirmation email draft if provided. You can also download an opening-day calendar invite. This page never sends mail on its own.</div>
-        </div>
+          <label for="email">Your email (required)</label>
+          <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
 
-        <div>
-          <label for="phone">Phone number (optional)</label>
-          <input id="phone" type="tel" autocomplete="tel" placeholder="+1 555 123 4567">
-          <div class="hint">Adds text-message buttons for your confirmation and for opening day. This page never sends texts on its own.</div>
+          <div class="hint">
+            Used for your confirmation draft and the calendar invite on opening day.
+            This page never sends mail on its own.
+          </div>
         </div>
-
+         <div>
+        <label for="phone">Phone number (optional)</label>
+        <input id="phone" type="tel" autocomplete="tel" placeholder="+1 555 123 4567">
+        <div class="hint">Adds text-message buttons for your confirmation and for opening day. This page never sends texts on its own.</div>
+        </div>
         <div>
           <button class="seal" id="seal" type="button">Seal capsule</button>
           <div class="err" id="err" role="alert"></div>
