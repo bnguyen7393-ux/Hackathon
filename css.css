@@ -1,0 +1,152 @@
+﻿:root{
+  --bg:#ecdfc6; --dot:rgb(58 44 32 / .14); --paper:#fffaf0; --text:#3a2c20; --muted:#6e5b49;
+  --edge:#3a2c20; --shade:#3a2c20; --on:#2b2118;
+  --mustard:#f0bf48; --teal:#55a39a; --coral:#ee8f7c; --sky:#7db7d6; --can:#6aa39b;
+  --n1:#fff1bf; --n2:#d7ede9; --n3:#fbd9d1; --focus:#1f6f78; --danger:#a82b1f;
+  --head:"Caveat Brush","Segoe Print","Comic Sans MS",cursive;
+  --body:"Patrick Hand","Segoe Print","Comic Sans MS",cursive;
+  --wob:28px 10px 24px 12px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#2a211c; --dot:rgb(240 228 207 / .09); --paper:#3a2e27; --text:#f1e6d1; --muted:#cdbda3;
+    --edge:#a89478; --shade:#120d0a; --n1:#4a4026; --n2:#27403d; --n3:#4d302b;
+    --focus:#8fd1c9; --danger:#ff9c8f; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#2a211c; --dot:rgb(240 228 207 / .09); --paper:#3a2e27; --text:#f1e6d1; --muted:#cdbda3;
+  --edge:#a89478; --shade:#120d0a; --n1:#4a4026; --n2:#27403d; --n3:#4d302b;
+  --focus:#8fd1c9; --danger:#ff9c8f; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  background-color:var(--bg);
+  background-image:radial-gradient(var(--dot) 1.5px,transparent 1.5px);background-size:24px 24px;
+  color:var(--text);font:400 21px/1.5 var(--body);
+}
+main{max-width:980px;margin:0 auto;padding:clamp(20px,5vw,56px);display:grid;gap:clamp(40px,7vw,72px)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+h1,h2,h3{font-family:var(--head);font-weight:400;margin:0;line-height:1.05}
+h1{font-size:clamp(52px,10vw,96px);transform:rotate(-1.5deg);margin-bottom:16px}
+h2{font-size:38px;margin-bottom:24px;transform:rotate(-.8deg)}
+h3{font-size:28px}
+p{margin:0}
+
+.theme{
+  position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:14px;z-index:10;
+  font:400 20px/1 var(--head);color:var(--on);background:var(--mustard);
+  border:2px solid var(--edge);border-radius:var(--wob);padding:10px 16px;cursor:pointer;
+  box-shadow:3px 3px 0 var(--shade);transform:rotate(3deg);transition:transform .2s
+}
+.theme:hover{transform:rotate(0) scale(1.05)}
+
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,6vw,72px);align-items:center;padding-top:28px}
+.hero p{max-width:28em;font-size:24px;color:var(--muted)}
+
+.capsule{position:relative;width:clamp(190px,28vw,260px);filter:drop-shadow(4px 6px 0 rgb(0 0 0 / .14))}
+.capsule svg{display:block;width:100%;height:auto;overflow:visible}
+.capsule text{font-family:var(--head);fill:var(--on)}
+.capsule .lid{transform-origin:42px 102px;transform:translate(-6px,-30px) rotate(-14deg);transition:transform .8s cubic-bezier(.34,1.56,.64,1)}
+.capsule.sealed .lid{transform:none}
+.capsule::after{
+  content:"dig me up on opening day";position:absolute;right:-14px;bottom:-6px;width:120px;
+  font:400 22px/1.05 var(--head);color:var(--text);transform:rotate(-6deg);text-align:center
+}
+
+.panel{
+  position:relative;background:var(--paper);border:3px solid var(--edge);border-radius:14px 22px 16px 24px;
+  box-shadow:6px 6px 0 var(--shade);padding:clamp(28px,4.5vw,44px);
+  outline:2px dashed color-mix(in srgb,var(--edge) 45%,transparent);outline-offset:-12px
+}
+.panel::before{
+  content:"";position:absolute;top:-17px;left:50%;width:130px;height:32px;margin-left:-65px;transform:rotate(-3deg);
+  background:repeating-linear-gradient(45deg,var(--mustard) 0 10px,#f6d67f 10px 20px);border-radius:3px;opacity:.95
+}
+.grid{display:grid;gap:28px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+label{display:block;font:400 26px/1.1 var(--head);margin-bottom:8px}
+
+input,textarea{
+  width:100%;font:400 21px/1.5 var(--body);color:var(--text);
+  background:color-mix(in srgb,var(--paper) 65%,var(--bg));
+  border:2px solid var(--edge);border-radius:14px 10px 16px 10px;padding:11px 15px;transition:background .2s
+}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.8}
+input:focus,textarea:focus{outline:3px solid var(--focus);outline-offset:2px;background:var(--paper)}
+textarea{min-height:180px;resize:vertical}
+
+.presets{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.presets button{
+  font:400 20px/1 var(--head);color:var(--on);background:var(--mustard);border:2px solid var(--edge);
+  border-radius:var(--wob);padding:8px 14px;cursor:pointer;box-shadow:2px 2px 0 var(--shade);
+  transform:rotate(-2deg);transition:transform .2s
+}
+.presets button:nth-child(2){background:var(--teal);transform:rotate(1.5deg)}
+.presets button:nth-child(3){background:var(--coral);transform:rotate(-1deg)}
+.presets button:nth-child(4){background:var(--sky);transform:rotate(2deg)}
+.presets button:hover{transform:rotate(0) translateY(-2px) scale(1.06)}
+
+.drop{
+  border:3px dashed var(--edge);border-radius:18px 12px 20px 12px;padding:30px 20px;text-align:center;
+  color:var(--muted);cursor:pointer;transition:background .2s
+}
+.drop:hover,.drop.over,.drop.drag,.drop.dragover{background:color-mix(in srgb,var(--teal) 25%,transparent);color:var(--text)}
+
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:16px;margin-top:16px}
+.thumbs:empty{display:none}
+.thumbs>*{position:relative;background:#fff;padding:6px 6px 22px;box-shadow:2px 3px 0 var(--shade);transform:rotate(-2deg)}
+.thumbs>*:nth-child(even){transform:rotate(2.5deg)}
+.thumbs img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.thumbs button{
+  position:absolute;top:-8px;right:-8px;width:28px;height:28px;padding:0;border:2px solid var(--edge);border-radius:50%;
+  background:var(--coral);color:var(--on);font:400 20px/1 var(--head);cursor:pointer
+}
+.hint{margin-top:8px;font-size:18px;color:var(--muted)}
+
+.seal{
+  font:400 32px/1 var(--head);color:var(--on);background:var(--mustard);border:3px solid var(--edge);
+  border-radius:var(--wob);padding:16px 34px;cursor:pointer;box-shadow:4px 4px 0 var(--shade);
+  transition:transform .15s,box-shadow .15s
+}
+.seal:hover{transform:translate(-2px,-2px) rotate(-1deg);box-shadow:6px 6px 0 var(--shade)}
+.seal:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--shade)}
+.err{min-height:1.5em;margin-top:12px;color:var(--danger);font-size:20px}
+.confirm{margin-top:14px;padding:16px 18px;background:var(--n2);border:2px dashed var(--edge);border-radius:12px 18px 12px 16px}
+.confirm a{color:var(--focus);font-weight:700}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:30px 24px}
+.cards:empty::before{content:"Nothing buried yet. Your first capsule will show up here.";color:var(--muted)}
+.cards>*{
+  position:relative;background:var(--n1);color:var(--text);border:2.5px solid var(--edge);border-radius:6px 16px 8px 18px;
+  box-shadow:4px 4px 0 var(--shade);padding:26px 20px 20px;display:grid;gap:8px;align-content:start;
+  transform:rotate(-1.2deg);transition:transform .2s
+}
+.cards>*:nth-child(3n+2){background:var(--n2);transform:rotate(1deg)}
+.cards>*:nth-child(3n){background:var(--n3);transform:rotate(-.5deg)}
+.cards>*:hover{transform:rotate(0)}
+.cards>*::before{
+  content:"";position:absolute;top:-12px;left:50%;width:70px;height:22px;margin-left:-35px;transform:rotate(4deg);
+  background:rgb(240 191 72 / .88);border-radius:2px
+}
+.cards p{font-size:20px;color:var(--muted)}
+.cards .msg{color:var(--text);white-space:pre-wrap}
+.cards img{max-width:100%;border:6px solid #fff;border-bottom-width:16px;box-shadow:2px 3px 0 var(--shade)}
+.cards .ready{outline:3px dashed var(--teal);outline-offset:4px}
+.cards button{
+  justify-self:start;font:400 22px/1 var(--head);color:var(--on);background:var(--teal);border:2px solid var(--edge);
+  border-radius:var(--wob);padding:9px 18px;cursor:pointer;box-shadow:2px 2px 0 var(--shade)
+}
+.cards .ghost{background:transparent;color:var(--muted);box-shadow:none;font-size:18px}
+
+@media (max-width:720px){
+  .hero{grid-template-columns:1fr}
+  .capsule{width:200px;margin:6px 0 24px}
+  .grid.two{grid-template-columns:1fr}
+  .seal{width:100%}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}

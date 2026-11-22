@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Time Capsule</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+  <button class="theme" id="theme" aria-label="Toggle dark mode">
+    Theme
+  </button>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Write to your future self.</h1>
+        <p>
+          Seal a message, pick the day it can be opened, and leave it alone.
+          Your capsules stay in this browser until their time comes.
+        </p>
+      </div>
+
+      <div class="capsule" id="capsule" aria-hidden="true">
+        <div class="half top"></div>
+        <div class="half bottom"></div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="new">
+      <h2 id="new">Seal a new capsule</h2>
+
+      <div class="grid">
+        <div class="grid two">
+          <div>
+            <label for="title">Title</label>
+            <input id="title" maxlength="60" placeholder="Letter to 2030">
+          </div>
+
+          <div>
+            <label for="date">Opens on</label>
+            <input id="date" type="date">
+
+            <div class="presets" role="group" aria-label="Quick dates">
+              <button type="button" data-add="7">1 week</button>
+              <button type="button" data-add="30">1 month</button>
+              <button type="button" data-add="365">1 year</button>
+              <button type="button" data-add="1825">5 years</button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="text">Message</label>
+          <textarea id="text" placeholder="What’s on your mind today? What do you hope is true by then?"></textarea>
+        </div>
+
+        <div>
+          <label for="file">Photos</label>
+
+          <div class="drop" id="drop" tabindex="0" role="button" aria-label="Add photos">
+            Drop photos here, or tap to choose (up to 6)
+          </div>
+
+          <input id="file" type="file" accept="image/*" multiple hidden>
+          <div class="thumbs" id="thumbs"></div>
+        </div>
+
+        <div>
+          <label for="email">Your email (optional)</label>
+          <input id="email" type="email" autocomplete="email" placeholder="you@example.com">
+          <div class="hint">Adds a confirmation email draft if provided. You can also download an opening-day calendar invite. This page never sends mail on its own.</div>
+        </div>
+
+        <div>
+          <label for="phone">Phone number (optional)</label>
+          <input id="phone" type="tel" autocomplete="tel" placeholder="+1 555 123 4567">
+          <div class="hint">Adds text-message buttons for your confirmation and for opening day. This page never sends texts on its own.</div>
+        </div>
+
+        <div>
+          <button class="seal" id="seal" type="button">Seal capsule</button>
+          <div class="err" id="err" role="alert"></div>
+          <div class="confirm" id="confirm" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vault" aria-labelledby="v">
+      <h2 id="v">Your capsules</h2>
+      <div class="cards" id="cards"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
