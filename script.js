@@ -72,10 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
         typeof capsule.title === "string" &&
         typeof capsule.message === "string" &&
         typeof capsule.unlockDate === "string" &&
-        parseDate(capsule.unlockDate) &&
-        typeof capsule.email === "string"
+        parseDate(capsule.unlockDate)
       ).map(capsule => ({
         ...capsule,
+        email: typeof capsule.email === "string" ? capsule.email : "",
         phone: typeof capsule.phone === "string" ? capsule.phone : "",
         photos: Array.isArray(capsule.photos)
           ? capsule.photos.filter(photo => typeof photo === "string" && photo.startsWith("data:image/"))
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
       actions.append(smsParagraph);
     }
 
-    if (confirmationActions) {
+    if (confirmationActions && capsule.email) {
       const emailParagraph = document.createElement("p");
       emailParagraph.append(makeLink("Open confirmation email draft", emailDraft(capsule)));
       actions.append(emailParagraph);
@@ -365,8 +365,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!isValidFutureDate(unlockDate)) {
       return showError("Please select a date after today.");
     }
-    if (!email || !emailInput.checkValidity()) {
-      return showError("Please enter a valid email address.");
+    if (email && !emailInput.checkValidity()) {
+      return showError("Please enter a valid email address or leave it blank.");
     }
     if (phoneInput.value.trim() && !phoneInput.checkValidity()) {
       return showError("Please enter a valid phone number or leave it blank.");
